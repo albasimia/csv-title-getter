@@ -1,0 +1,22 @@
+extends /layout/_default-layout
+
+prepend config-block
+  - page_name = ''
+
+//- append stylesheet-block
+
+//- append javascript-block
+
+block content-block
+  h1#title Hello World!!
+  form(onsubmit='return false')
+    p
+      label
+        | URL：
+        input#url(type='url', name='url', size='30')
+    p
+      input#submit(type='submit', value='送信する')
+  .dropArea
+    p.dropMessage drag & drop!!
+  table#result
+    tbody

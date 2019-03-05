@@ -1,0 +1,31 @@
+html,
+body,
+.wrapper{
+    width: 100vw;
+    height: 100vh;
+}
+.wrapper{
+    background-color:#2b2e3b;
+    color: white;
+    
+}
+
+.dropArea{
+    width: 100%;
+    height: 50vh;
+    position: relative;
+    box-sizing: border-box;
+    border: dashed 5px white;
+    border-radius: 10px;
+    text-align: center;
+}
+.dropMessage{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dropOver{
+    background-color: rgba(#fff, 0.3);
+}
