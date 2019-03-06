@@ -29,3 +29,12 @@ body,
 .dropOver{
     background-color: rgba(#fff, 0.3);
 }
+
+#result{
+    display: block;
+    // position: absolute;
+    // bottom: 0;
+    width: 100vw;
+    height: 50%;
+    overflow: scroll;
+}

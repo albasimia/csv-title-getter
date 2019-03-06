@@ -1,10 +1,13 @@
 const carlo = require('carlo');
 const path = require('path');
-const puppeteer = require('puppeteer');
+
+let app
+let page
+let testPage
 
 (async () => {
     // Launch the browser.
-    const app = await carlo.launch({
+    app = await carlo.launch({
         width: 500,
         height: 500,
     });
@@ -17,21 +20,36 @@ const puppeteer = require('puppeteer');
 
     // Expose 'env' function in the web environment.
     await app.exposeFunction('getPageTitle', getPageTitle);
+    await app.exposeFunction('createPage', createPage);
+    await app.exposeFunction('closeWindow', closeWindow);
 
     // Navigate to the main page of your app.
     await app.load('index.html');
 })();
 
+const createPage = async () => {
+    try {
+        page = await app.createWindow()
+        page.domContentLoadedCallback_ = () => {
+            return false
+        }
+        testPage = await page.pageForTest()
+    } catch (e) {
+        console.error(e)
+    }
+}
+
+
 const getPageTitle = async (url) => {
-    const browser = await puppeteer.launch({
-        // headless: false
+    await testPage.goto(url, {
+        waitUntil: 'domcontentloaded',
     })
-    const page = await browser.newPage()
-    await page.goto(url, {
-        waitUntil: 'networkidle2',
-    })
-    const title = await page.evaluate(() => {
+    const title = await testPage.evaluate(() => {
         return document.getElementsByTagName('title')[0].innerText
     })
     return title
+}
+
+const closeWindow = () =>{
+    page.close()
 }

@@ -49,7 +49,6 @@
     "android >= 4.4"
   ],
   "dependencies": {
-    "carlo": "^0.9.43",
-    "puppeteer": "^1.13.0"
+    "carlo": "^0.9.43"
   }
 }
